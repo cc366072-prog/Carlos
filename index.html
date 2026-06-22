@@ -1,11 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Generador de Contraseñas</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+            background:#f0f2f5;
+        }
+
+        .container{
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+            width:350px;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:20px;
+        }
+
+        label{
+            display:block;
+            margin:10px 0;
+        }
+
+        input[type="number"],
+        input[type="text"]{
+            width:100%;
+            padding:10px;
+            margin-top:5px;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
+
+        button{
+            width:100%;
+            padding:10px;
+            margin-top:10px;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        .generar{
+            background:#4CAF50;
+            color:white;
+        }
+
+        .copiar{
+            background:#2196F3;
+            color:white;
+        }
+
+        button:hover{
+            opacity:0.9;
+        }
+    </style>
 </head>
 <body>
-    
+
+<div class="container">
+    <h1>Generador de Contraseñas</h1>
+
+    <label>
+        Longitud:
+        <input type="number" id="length" min="4" max="50" value="12">
+    </label>
+
+    <label>
+        <input type="checkbox" id="mayusculas" checked>
+        Incluir mayúsculas
+    </label>
+
+    <label>
+        <input type="checkbox" id="numeros" checked>
+        Incluir números
+    </label>
+
+    <label>
+        <input type="checkbox" id="simbolos" checked>
+        Incluir símbolos
+    </label>
+
+    <button class="generar" onclick="generarPassword()">
+        Generar Contraseña
+    </button>
+
+    <input type="text" id="resultado" readonly placeholder="Tu contraseña aparecerá aquí">
+
+    <button class="copiar" onclick="copiarPassword()">
+        Copiar
+    </button>
+</div>
+
+<script>
+function generarPassword() {
+
+    let caracteres = "abcdefghijklmnopqrstuvwxyz";
+
+    if(document.getElementById("mayusculas").checked){
+        caracteres += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    }
+
+    if(document.getElementById("numeros").checked){
+        caracteres += "0123456789";
+    }
+
+    if(document.getElementById("simbolos").checked){
+        caracteres += "!@#$%^&*()_+-=[]{}";
+    }
+
+    const longitud = parseInt(document.getElementById("length").value);
+
+    let password = "";
+
+    for(let i = 0; i < longitud; i++){
+        const indice = Math.floor(Math.random() * caracteres.length);
+        password += caracteres.charAt(indice);
+    }
+
+    document.getElementById("resultado").value = password;
+}
+
+function copiarPassword() {
+    const resultado = document.getElementById("resultado");
+
+    if(resultado.value === ""){
+        alert("Primero genera una contraseña.");
+        return;
+    }
+
+    navigator.clipboard.writeText(resultado.value);
+    alert("Contraseña copiada.");
+}
+</script>
+
 </body>
 </html>
