@@ -46,3 +46,8 @@ Mostrar contraseña
    ▼
 Copiar contraseña
 Diagrama de funcionamiento
+
+
+Link del diagrama: https://gitdiagram.com/cc366072-prog/carlos 
+(Se recomienda abrir o intentar de nuevo en caso de herror)
+
