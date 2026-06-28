@@ -1,116 +1,212 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Contraseñas</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Contraseñas Seguras</title>
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, sans-serif;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        body{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            min-height:100vh;
-            background:#f0f2f5;
-        }
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:linear-gradient(-45deg,#4facfe,#00f2fe,#6a11cb,#2575fc);
+    background-size:400% 400%;
+    animation:fondo 12s ease infinite;
+}
 
-        .container{
-            background:white;
-            padding:30px;
-            border-radius:15px;
-            box-shadow:0 5px 15px rgba(0,0,0,0.2);
-            width:350px;
-        }
+@keyframes fondo{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
 
-        h1{
-            text-align:center;
-            margin-bottom:20px;
-        }
+.container{
+    width:400px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:30px;
+    border:1px solid rgba(255,255,255,0.3);
+    box-shadow:0 15px 30px rgba(0,0,0,.3);
+    animation:entrada .8s ease;
+}
 
-        label{
-            display:block;
-            margin:10px 0;
-        }
+@keyframes entrada{
+    from{
+        opacity:0;
+        transform:translateY(-40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
-        input[type="number"],
-        input[type="text"]{
-            width:100%;
-            padding:10px;
-            margin-top:5px;
-            border:1px solid #ccc;
-            border-radius:5px;
-        }
+h1{
+    color:white;
+    text-align:center;
+    margin-bottom:10px;
+    font-size:28px;
+}
 
-        button{
-            width:100%;
-            padding:10px;
-            margin-top:10px;
-            border:none;
-            border-radius:5px;
-            cursor:pointer;
-            font-size:16px;
-        }
+.descripcion{
+    color:white;
+    text-align:center;
+    margin-bottom:25px;
+    font-size:15px;
+    opacity:.9;
+}
 
-        .generar{
-            background:#4CAF50;
-            color:white;
-        }
+label{
+    display:block;
+    color:white;
+    margin-top:15px;
+    font-weight:bold;
+}
 
-        .copiar{
-            background:#2196F3;
-            color:white;
-        }
+input[type="number"],
+input[type="text"]{
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    border:none;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+}
 
-        button:hover{
-            opacity:0.9;
-        }
-    </style>
+input[type="number"]:focus,
+input[type="text"]:focus{
+    transform:scale(1.03);
+    box-shadow:0 0 12px rgba(255,255,255,.8);
+}
+
+.checkbox{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:15px;
+    color:white;
+    font-weight:bold;
+}
+
+.checkbox input{
+    transform:scale(1.2);
+}
+
+button{
+    width:100%;
+    padding:13px;
+    margin-top:18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.generar{
+    background:linear-gradient(45deg,#00c853,#64dd17);
+    color:white;
+}
+
+.copiar{
+    background:linear-gradient(45deg,#2196F3,#00BCD4);
+    color:white;
+}
+
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(0,0,0,.3);
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+#resultado{
+    margin-top:18px;
+    text-align:center;
+    font-weight:bold;
+    letter-spacing:1px;
+    background:white;
+}
+
+footer{
+    margin-top:20px;
+    text-align:center;
+    color:white;
+    font-size:13px;
+    opacity:.8;
+}
+</style>
+
 </head>
 <body>
 
 <div class="container">
-    <h1>Generador de Contraseñas</h1>
 
-    <label>
-        Longitud:
-        <input type="number" id="length" min="4" max="50" value="12">
-    </label>
+<h1>🔐 Generador de Contraseñas</h1>
 
-    <label>
-        <input type="checkbox" id="mayusculas" checked>
-        Incluir mayúsculas
-    </label>
+<p class="descripcion">
+Genera contraseñas seguras y personalizadas en segundos.
+</p>
 
-    <label>
-        <input type="checkbox" id="numeros" checked>
-        Incluir números
-    </label>
+<label>
+Longitud de la contraseña:
+<input type="number" id="length" min="4" max="50" value="12">
+</label>
 
-    <label>
-        <input type="checkbox" id="simbolos" checked>
-        Incluir símbolos
-    </label>
+<label class="checkbox">
+<input type="checkbox" id="mayusculas" checked>
+Incluir letras mayúsculas
+</label>
 
-    <button class="generar" onclick="generarPassword()">
-        Generar Contraseña
-    </button>
+<label class="checkbox">
+<input type="checkbox" id="numeros" checked>
+Incluir números
+</label>
 
-    <input type="text" id="resultado" readonly placeholder="Tu contraseña aparecerá aquí">
+<label class="checkbox">
+<input type="checkbox" id="simbolos" checked>
+Incluir símbolos
+</label>
 
-    <button class="copiar" onclick="copiarPassword()">
-        Copiar
-    </button>
+<button class="generar" onclick="generarPassword()">
+⚡ Generar Contraseña
+</button>
+
+<input
+type="text"
+id="resultado"
+readonly
+placeholder="Aquí aparecerá tu contraseña">
+
+<button class="copiar" onclick="copiarPassword()">
+📋 Copiar Contraseña
+</button>
+
+<footer>
+Proyecto desarrollado con HTML, CSS y JavaScript
+</footer>
+
 </div>
 
 <script>
-function generarPassword() {
+
+function generarPassword(){
 
     let caracteres = "abcdefghijklmnopqrstuvwxyz";
 
@@ -123,32 +219,49 @@ function generarPassword() {
     }
 
     if(document.getElementById("simbolos").checked){
-        caracteres += "!@#$%^&*()_+-=[]{}";
+        caracteres += "!@#$%^&*()_+-=[]{}<>?/|";
+    }
+
+    if(caracteres === "abcdefghijklmnopqrstuvwxyz"){
+        // Solo minúsculas seleccionadas
     }
 
     const longitud = parseInt(document.getElementById("length").value);
 
+    if(longitud < 4 || longitud > 50){
+        alert("La longitud debe estar entre 4 y 50 caracteres.");
+        return;
+    }
+
     let password = "";
 
-    for(let i = 0; i < longitud; i++){
-        const indice = Math.floor(Math.random() * caracteres.length);
+    for(let i=0;i<longitud;i++){
+
+        const indice = Math.floor(Math.random()*caracteres.length);
+
         password += caracteres.charAt(indice);
+
     }
 
     document.getElementById("resultado").value = password;
+
 }
 
-function copiarPassword() {
+function copiarPassword(){
+
     const resultado = document.getElementById("resultado");
 
-    if(resultado.value === ""){
+    if(resultado.value===""){
         alert("Primero genera una contraseña.");
         return;
     }
 
     navigator.clipboard.writeText(resultado.value);
-    alert("Contraseña copiada.");
+
+    alert("✅ Contraseña copiada correctamente.");
+
 }
+
 </script>
 
 </body>
