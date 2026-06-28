@@ -64,4 +64,4 @@ Copiar contraseña
 
 El desarrollo de este proyecto demuestra cómo las tecnologías web pueden utilizarse para resolver necesidades cotidianas de forma sencilla y eficiente. Un generador de contraseñas contribuye a fortalecer la seguridad digital de los usuarios al facilitar la creación de claves más robustas y difíciles de vulnerar. Además, el proyecto permitió fortalecer competencias en programación, diseño web, documentación técnica y uso de herramientas de control de versiones, evidenciando la importancia de la tecnología en la solución de problemas reales y en la formación profesional de los estudiantes.
 
-
+Diagrama de gitdiagram (https://gitdiagram.com/cc366072-prog/Carlos) si da error intente de nuevo
